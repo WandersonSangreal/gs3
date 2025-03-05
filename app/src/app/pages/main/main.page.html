@@ -1,0 +1,37 @@
+<ion-app>
+  <app-header></app-header>
+
+  <ion-content class="main-background ion-padding">
+
+    <ion-tabs>
+
+      <ion-app>
+        <ion-router-outlet></ion-router-outlet>
+      </ion-app>
+
+    </ion-tabs>
+
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="dashboard">
+          <ion-icon name="home-outline"></ion-icon>
+          Home
+        </ion-tab-button>
+        <ion-tab-button tab="invoice">
+          <ion-icon name="document-text-outline"></ion-icon>
+          Fatura
+        </ion-tab-button>
+        <ion-tab-button tab="card">
+          <ion-icon name="card-outline"></ion-icon>
+          Cartão
+        </ion-tab-button>
+        <ion-tab-button tab="shop">
+          <ion-icon name="bag-handle-outline"></ion-icon>
+          Shop
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+
+  </ion-content>
+
+</ion-app>

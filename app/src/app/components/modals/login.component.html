@@ -1,0 +1,50 @@
+<ion-content class="ion-padding rounded-modal">
+
+  <form [formGroup]="form" (ngSubmit)="login()">
+
+    <ion-grid>
+
+      <ion-row>
+
+        <ion-col>
+          <h3 class="ion-margin-bottom">Seja bem-vindo(a)!</h3>
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row>
+
+        <ion-col>
+          <ion-text>Digite sua senha do aplicativo.</ion-text>
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-input label="CPF" shape="round" labelPlacement="floating" placeholder="CPF" fill="outline"
+                     name="cpf" formControlName="cpf" [maskito]="cpfMask" [maskitoElement]="maskPredicate"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-input type="password" shape="round" label="Senha" labelPlacement="floating" placeholder="Senha"
+                     fill="outline" name="password" formControlName="password">
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+          </ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-margin-top">
+        <ion-col>
+          <ion-button expand="full" shape="round" size="large" [disabled]="form.invalid" type="submit">
+            Confirmar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </form>
+
+</ion-content>

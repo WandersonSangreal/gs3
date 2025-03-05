@@ -1,0 +1,65 @@
+<ion-grid class="ion-padding-vertical">
+
+  <ion-row>
+    <ion-col>
+
+      <ion-title>
+        <strong>Últimos lançamentos</strong>
+      </ion-title>
+
+    </ion-col>
+    <ion-col class="ion-padding-horizontal">
+
+      <div class="centered-right-content ion-text-right">
+
+        <ion-text>
+          <small class="margin-end-sm">Ver todos</small>
+        </ion-text>
+        <ion-icon name="chevron-forward-outline" color="tertiary"></ion-icon>
+
+      </div>
+
+    </ion-col>
+  </ion-row>
+
+
+  <ion-row>
+    <ion-col>
+
+      <ng-template ngFor let-list [ngForOf]="lists" let-i="index">
+
+        <ion-title color="tertiary">
+          <h5>{{ list.date | date: 'dd MMM' }}</h5>
+        </ion-title>
+
+        <ion-list [inset]="true">
+
+          <ion-item *ngFor="let item of list.items">
+
+            <ion-button color="light" class="padding-sm ion-margin-end no-shadow rounded">
+              <ion-icon name="{{ item.icon }}" size="large" color="tertiary"></ion-icon>
+            </ion-button>
+
+            <ion-label>
+              <h2><strong>{{ item.label }}</strong></h2>
+              <p>{{ item.date | date: "dd/MM 'às' hh:mm" }}</p>
+            </ion-label>
+
+            <ion-label slot="end" class="ion-text-right">
+
+              <h2><strong>{{ item.amount | currency: 'BRL' }}</strong></h2>
+
+              <p *ngIf="item.by > 1">em {{ item.by }}x</p>
+
+            </ion-label>
+
+          </ion-item>
+
+        </ion-list>
+
+      </ng-template>
+
+    </ion-col>
+  </ion-row>
+</ion-grid>
+

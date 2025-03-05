@@ -1,0 +1,63 @@
+<ion-app>
+
+  <ion-content [fullscreen]="true" class="ion-padding home-background">
+
+    <ion-grid class="h-100">
+      <ion-row class="h-100 ion-align-items-between">
+        <ion-col class="box">
+          <div class="ion-text-center">
+
+            <img src="/assets/logo.svg" alt="Logo" class="ion-padding brand">
+
+          </div>
+        </ion-col>
+        <ion-col class="box">
+          <div class="ion-text-center">
+
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <ion-button shape="round" fill="outline" color="light" size="large" (click)="openLoginModal()">
+                    <ion-icon slot="icon-only" name="add" size="large"></ion-icon>
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-text color="light">Entrar</ion-text>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+          </div>
+        </ion-col>
+        <ion-col class="box">
+          <div>
+
+            <ion-segment color="light" scrollable>
+              <ion-segment-button>
+                <ion-icon name="card-outline" color="light"></ion-icon>
+                <ion-text color="light">Solicitar <br> Cartão</ion-text>
+              </ion-segment-button>
+              <ion-segment-button>
+                <ion-icon name="search-outline" color="light"></ion-icon>
+                <ion-text color="light">Acompanhar <br> Solicitação</ion-text>
+              </ion-segment-button>
+              <ion-segment-button>
+                <ion-icon name="help-circle-outline" color="light"></ion-icon>
+                <ion-text color="light">Perguntas <br> Frequentes</ion-text>
+              </ion-segment-button>
+              <ion-segment-button>
+                <ion-icon name="call-outline" color="light"></ion-icon>
+                <ion-text color="light">Central de <br> Atendimento</ion-text>
+              </ion-segment-button>
+            </ion-segment>
+
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-content>
+
+</ion-app>

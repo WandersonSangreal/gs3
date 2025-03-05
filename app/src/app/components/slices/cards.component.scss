@@ -1,0 +1,20 @@
+#cards {
+
+  ion-segment-button {
+    --padding-start: 0;
+    --padding-end: 0;
+    --indicator-color: transparent !important;
+    --indicator-color-checked: transparent !important;
+
+    ion-card {
+      width: 80vw;
+
+      small {
+        display: block;
+        font-weight: normal;
+        text-transform: initial;
+      }
+    }
+  }
+
+}
