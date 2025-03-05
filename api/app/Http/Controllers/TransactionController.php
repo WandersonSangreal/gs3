@@ -2,47 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Card;
 use App\Models\Transaction;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 
 class TransactionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Card $card)
     {
-        //
+        $transactions = Transaction::where('card_id', $card->getKey())->limit(20)->get()->toArray();
+
+        $results = [];
+
+        foreach ($transactions as $transaction) {
+
+            if (!array_key_exists($transaction['d'], $results)) {
+                $results[$transaction['d']] = ['date' => $transaction['d'], 'items' => []];
+            }
+
+            array_push($results[$transaction['d']]['items'], $transaction);
+
+        }
+
+        return response(array_values($results));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreTransactionRequest $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Transaction $transaction)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateTransactionRequest $request, Transaction $transaction)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Transaction $transaction)
     {
         //

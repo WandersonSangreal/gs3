@@ -1,9 +1,13 @@
 <ion-content class="transparent-background">
 
-  <app-cards></app-cards>
+  <app-cards (selectedCard)="selectedCard($event)"></app-cards>
 
   <app-favorites></app-favorites>
 
-  <app-shop-list></app-shop-list>
+  @if (card) {
+
+  <app-shop-list [card]="card"></app-shop-list>
+
+  }
 
 </ion-content>

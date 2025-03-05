@@ -1,0 +1,14 @@
+ion-button {
+  position: relative;
+
+  ion-badge {
+    position: absolute;
+    font-size: 8pt;
+    right: -10px;
+    top: -3px;
+  }
+
+  &::part(native) {
+    overflow: visible;
+  }
+}

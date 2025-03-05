@@ -4,6 +4,7 @@ import {Storage} from '@ionic/storage-angular';
 import {firstValueFrom} from "rxjs";
 import {User} from "../models/user";
 import {Token} from "../models/token";
+import {ApiService} from "./api.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,8 @@ import {Token} from "../models/token";
 export class AuthService {
 
   private readonly storageReady: Promise<Storage>;
-  private url: string = 'http://localhost:8000/api/auth/';
 
-  public constructor(private http: HttpClient, private storage: Storage) {
+  public constructor(private apiService: ApiService, private storage: Storage) {
 
     this.storageReady = this.storage.create();
 
@@ -23,7 +23,7 @@ export class AuthService {
 
     try {
 
-      const response: Token = await firstValueFrom<Token>(this.http.post<Token>(this.url.concat('login'), credentials));
+      const response: Token = await firstValueFrom<Token>(this.apiService.post<Token>('auth/login', credentials));
 
       if (response.token) {
 

@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {CurrencyPipe, DatePipe, NgFor, NgIf} from "@angular/common";
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {AsyncPipe, CurrencyPipe, DatePipe, NgFor, NgIf} from "@angular/common";
 import {
   IonGrid,
   IonRow,
@@ -10,8 +10,12 @@ import {
   IonTitle,
   IonList,
   IonLabel,
-  IonText,
+  IonText, IonBadge,
 } from "@ionic/angular/standalone";
+import {Card} from "../../models/card";
+import {ApiService} from "../../services/api.service";
+import {Observable} from "rxjs";
+import {Transaction} from "../../models/transaction";
 
 @Component({
   selector: 'app-shop-list',
@@ -20,8 +24,10 @@ import {
   imports: [
     NgFor,
     NgIf,
+    AsyncPipe,
     CurrencyPipe,
     DatePipe,
+    IonBadge,
     IonGrid,
     IonRow,
     IonCol,
@@ -34,23 +40,37 @@ import {
     IonLabel,
   ]
 })
-export class ShopListComponent {
+export class ShopListComponent implements OnInit, OnChanges {
 
-  public lists = [
-    {
-      date: '2024-09-05', items: [
-        {label: 'Apple', date: '2024-09-05 22:35', amount: 545.99, by: 12, icon: 'phone-portrait-outline'},
-        {label: 'Uber*Uber*Trip', date: '2024-09-05 15:25', amount: 12.96, by: 1, icon: 'car-outline'},
-      ]
-    },
-    {
-      date: '2024-09-03', items: [
-        {label: 'Carrefour', date: '2024-09-03 09:34', amount: 349.76, by: 3, icon: 'cart-outline'},
-      ]
-    },
-  ];
+  @Input({required: true}) public card!: Card;
 
-  constructor() {
+  public transactionList$!: Observable<Array<{ date: Date; items: Array<Transaction> }>>;
+
+  public constructor(private apiService: ApiService) {
+
+  }
+
+  public ngOnInit(): void {
+
+    this.getTransactions(this.card);
+
+  }
+
+  public getTransactions(card: Card) {
+
+    this.transactionList$ = this.apiService
+      .get<Array<{ date: Date; items: Array<Transaction> }>>(String(card.id).concat('/transactions'));
+
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+
+    if (changes['card']) {
+
+      this.getTransactions(this.card);
+
+    }
+
   }
 
 }

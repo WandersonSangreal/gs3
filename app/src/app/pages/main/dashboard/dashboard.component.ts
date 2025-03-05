@@ -1,29 +1,12 @@
 import {Component} from '@angular/core';
-import {NgFor} from "@angular/common";
 import {
   IonContent,
-  IonIcon,
-  IonGrid,
-  IonRow,
-  IonCol,
-  IonSegment,
-  IonSegmentButton,
-  IonText,
-  IonButton,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
-  IonItem,
-  IonTitle,
-  IonList,
-  IonLabel,
 } from '@ionic/angular/standalone';
 
 import {ShopListComponent} from "../../../components/slices/shop-list.component";
 import {FavoritesComponent} from "../../../components/slices/favorites.component";
 import {CardsComponent} from "../../../components/slices/cards.component";
+import {Card} from "../../../models/card";
 
 @Component({
   selector: 'app-dashboard',
@@ -39,7 +22,15 @@ import {CardsComponent} from "../../../components/slices/cards.component";
 })
 export class DashboardComponent {
 
-  constructor() {
+  public card!: Card;
+
+  public constructor() {
+  }
+
+  public selectedCard(card: Card) {
+
+    this.card = card;
+
   }
 
 }

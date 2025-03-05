@@ -4,11 +4,12 @@
 
     <ion-col>
 
-      <ion-segment color="light" scrollable id="cards">
+      <ion-segment color="light" scrollable id="cards" *ngIf="cardList$ | async as cardList" [value]="selected.id">
 
-        <ion-segment-button class="ion-text-left">
+        <ion-segment-button class="ion-text-left" *ngFor="let card of cardList" [value]="card.id"
+                            (click)="selectCard(card)">
 
-          <ion-card color="secondary">
+          <ion-card [color]="card.color">
             <ion-card-header>
 
               <ion-grid class="w-100">
@@ -17,8 +18,8 @@
                     <ion-content color="light"></ion-content>
                   </ion-col>
                   <ion-col>
-                    <ion-card-title>●●●● 5621</ion-card-title>
-                    <ion-card-subtitle>GS3 TEC</ion-card-subtitle>
+                    <ion-card-title>{{ card.number }}</ion-card-title>
+                    <ion-card-subtitle>{{ card.name }}</ion-card-subtitle>
                   </ion-col>
                   <ion-col>
                     <div class="ion-text-right">
@@ -37,61 +38,13 @@
                   <ion-col>
                     <ion-text>
                       <small>Limite disponível</small>
-                      <h1>R$ 7.867,80</h1>
+                      <h1>{{ card.limit | currency: 'BRL' }}</h1>
                     </ion-text>
                   </ion-col>
                   <ion-col>
                     <ion-text class="ion-text-right">
                       <small>Melhor dia de compra</small>
-                      <h1>20</h1>
-                    </ion-text>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-
-            </ion-card-content>
-          </ion-card>
-
-        </ion-segment-button>
-
-        <ion-segment-button class="ion-text-left">
-
-          <ion-card color="green">
-            <ion-card-header>
-
-              <ion-grid class="w-100">
-                <ion-row>
-                  <ion-col>
-                    <ion-content color="light"></ion-content>
-                  </ion-col>
-                  <ion-col>
-                    <ion-card-title>●●●● 5621</ion-card-title>
-                    <ion-card-subtitle>GS3 TEC</ion-card-subtitle>
-                  </ion-col>
-                  <ion-col>
-                    <div class="ion-text-right">
-                      <ion-icon name="eye-outline" size="large" color="tertiary"></ion-icon>
-                    </div>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-
-            </ion-card-header>
-
-            <ion-card-content>
-
-              <ion-grid class="w-100">
-                <ion-row>
-                  <ion-col>
-                    <ion-text>
-                      <small>Limite disponível</small>
-                      <h1>R$ 7.867,80</h1>
-                    </ion-text>
-                  </ion-col>
-                  <ion-col>
-                    <ion-text class="ion-text-right">
-                      <small>Melhor dia de compra</small>
-                      <h1>20</h1>
+                      <h1>{{ card.pay }}</h1>
                     </ion-text>
                   </ion-col>
                 </ion-row>

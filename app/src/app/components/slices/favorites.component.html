@@ -26,22 +26,10 @@
   <ion-row>
     <ion-col>
 
-      <ion-segment color="primary" scrollable id="favorites">
-        <ion-segment-button>
-          <ion-icon name="card-outline" color="primary" size="large"></ion-icon>
-          <ion-text color="primary"><small>Cartão virtual</small></ion-text>
-        </ion-segment-button>
-        <ion-segment-button>
-          <ion-icon name="add-circle-outline" color="primary" size="large"></ion-icon>
-          <ion-text color="primary"><small>Cartão adicional</small></ion-text>
-        </ion-segment-button>
-        <ion-segment-button>
-          <ion-icon name="shield-half-outline" color="primary" size="large"></ion-icon>
-          <ion-text color="primary"><small>Seguros</small></ion-text>
-        </ion-segment-button>
-        <ion-segment-button>
-          <ion-icon name="mail-outline" color="primary" size="large"></ion-icon>
-          <ion-text color="primary"><small>Pacotes</small></ion-text>
+      <ion-segment color="primary" scrollable id="favorites" *ngIf="favoriteList$ | async as favoriteList">
+        <ion-segment-button *ngFor="let favorite of favoriteList">
+          <ion-icon [name]="favorite.icon" color="primary" size="large"></ion-icon>
+          <ion-text color="primary"><small>{{ favorite.name }}</small></ion-text>
         </ion-segment-button>
       </ion-segment>
 
