@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Transaction extends Model
 {
@@ -13,6 +14,7 @@ class Transaction extends Model
     use HasFactory;
 
     protected $appends = ['d'];
+    protected $fillable = ['name', 'value', 'date', 'by', 'attention', 'icon', 'card_id'];
 
     protected function casts(): array
     {
@@ -31,6 +33,11 @@ class Transaction extends Model
         return Attribute::make(
             get: fn(mixed $value, array $attributes) => date('Y-m-d', strtotime(Carbon::createFromTimestampMs($attributes['date']))),
         );
+    }
+
+    public function card(): BelongsTo
+    {
+        return $this->belongsTo(Card::class);
     }
 
 }

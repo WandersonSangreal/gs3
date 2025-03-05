@@ -2,7 +2,8 @@ import {Component} from '@angular/core';
 import {Observable} from "rxjs";
 import {ApiService} from "../../services/api.service";
 import {User} from "../../models/user";
-import {NgIf} from "@angular/common";
+import {AuthService} from "../../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -14,9 +15,19 @@ export class HeaderComponent {
 
   public user$: Observable<User>;
 
-  public constructor(private apiService: ApiService) {
+  public constructor(private router: Router, private apiService: ApiService, private authService: AuthService) {
 
     this.user$ = this.apiService.get('auth/user');
+
+  }
+
+  public logout() {
+
+    this.authService.logout().then(response => {
+
+      this.router.navigate(['/home']);
+
+    });
 
   }
 

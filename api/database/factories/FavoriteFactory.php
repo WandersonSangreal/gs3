@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,10 @@ class FavoriteFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->randomElement(['Cartão virtual', 'Cartão adicional', 'Seguros', 'Pacotes']),
+            'icon' => fake()->randomElement(['card-outline', 'add-circle-outline', 'shield-half-outline', 'mail-outline']),
+            'resource' => fake()->randomElement(['virtual/card', 'card/add', 'insurance', 'packages']),
+            'user_id' => User::factory()
         ];
     }
 }

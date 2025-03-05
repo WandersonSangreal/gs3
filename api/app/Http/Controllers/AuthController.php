@@ -15,7 +15,7 @@ class AuthController extends Controller
             'password' => 'required|string|min:8',
         ]);
 
-        if (!Auth::attempt($credentials)) {
+        if (!Auth::attempt(array_merge($credentials, ['active' => true]))) {
 
             return response(['message' => 'invalid credentials'], 401);
 
