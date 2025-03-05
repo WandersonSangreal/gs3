@@ -1,0 +1,31 @@
+services:
+    api:
+        build: ./api
+        container_name: api
+        networks:
+            - app-network
+        ports:
+            - "8000:8000"
+        volumes:
+            - ./api:/var/www/html
+        environment:
+            - APP_KEY=base64:YourAppKeyHere
+        command: [ "php", "artisan", "serve", "--host=0.0.0.0", "--port=8000" ]
+
+    app:
+        build: ./app
+        container_name: app
+        networks:
+            - app-network
+        ports:
+            - "8100:8100"
+        volumes:
+            - ./app:/usr/src/app
+        environment:
+            - NODE_ENV=development
+            - NODE_OPTIONS=--max-old-space-size=4096
+        command: [ "ionic", "serve", "--host", "0.0.0.0", "--port", "8100", "--disable-host-check" ]
+
+networks:
+    app-network:
+        driver: bridge
