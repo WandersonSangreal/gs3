@@ -30,6 +30,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $hidden = [
+        'cpf',
         'password',
         'remember_token',
     ];

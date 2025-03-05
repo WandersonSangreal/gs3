@@ -11,7 +11,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => 'required|email|max:255',
+            'cpf' => 'required|digits:11',
             'password' => 'required|string|min:8',
         ]);
 

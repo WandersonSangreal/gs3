@@ -6,6 +6,9 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {ModalController} from "@ionic/angular";
 import {MaskitoElementPredicate, MaskitoOptions} from "@maskito/core";
 import {MaskitoDirective} from "@maskito/angular";
+import {AuthService} from "../../services/auth.service";
+import {ToastController} from "@ionic/angular/standalone";
+import {push} from "ionicons/icons";
 
 @Component({
   selector: 'app-login',
@@ -30,7 +33,7 @@ export class LoginComponent {
     ],
   };
 
-  public constructor(private formBuilder: FormBuilder, private modalController: ModalController, private router: Router) {
+  public constructor(private formBuilder: FormBuilder, private modalController: ModalController, private router: Router, private toastController: ToastController, private authService: AuthService) {
 
     this.form = this.formBuilder.group({
       cpf: [null, Validators.required],
@@ -39,11 +42,43 @@ export class LoginComponent {
 
   }
 
-  public login() {
+  public async login() {
 
-    this.modalController.dismiss();
+    if (this.form.valid) {
 
-    this.router.navigate(['/main']);
+      const credentials = this.form.value;
+
+      credentials.cpf = credentials.cpf.replace(/\D/g, '');
+
+      this.authService.login(credentials).then(response => {
+
+        if (response) {
+
+          this.modalController.dismiss();
+
+          this.router.navigate(['/main']);
+
+        } else {
+
+          this.error();
+
+        }
+
+      });
+
+    }
+
+  }
+
+  public async error() {
+
+    const toast = await this.toastController.create({
+      message: 'Erro ao tentar logar!',
+      duration: 1500,
+      position: 'bottom',
+    });
+
+    await toast.present();
 
   }
 
