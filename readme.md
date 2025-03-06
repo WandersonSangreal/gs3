@@ -76,7 +76,7 @@ usuários inativo
     123.456.789-32, inativo, []
     ```
    A senha para todos os usuários é ``password``, todos os usuários tem seus próprios cartões e cada cartão têm seus
-   lançamentos
+   lançamentos. Para deslogar, basta clicar no menu
 
 ---
 
